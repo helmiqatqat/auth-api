@@ -1,6 +1,6 @@
 'use strict';
 
-const { users } = require('../models')
+const { users } = require('../models/index')
 
 module.exports = async (req, res, next) => {
 
@@ -22,3 +22,6 @@ module.exports = async (req, res, next) => {
     next('Invalid Login');
   }
 }
+
+
+
