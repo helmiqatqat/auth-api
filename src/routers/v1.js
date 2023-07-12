@@ -1,11 +1,11 @@
 'use strict';
 
 const express = require('express');
-const dataModules = require('../models');
+const dataModules = require('../models/index');
 
-const router = express.Router();
+const routerv1 = express.Router();
 
-router.param('model', (req, res, next) => {
+routerv1.param('model', (req, res, next) => {
   const modelName = req.params.model;
   if (dataModules[modelName]) {
     req.model = dataModules[modelName];
@@ -15,11 +15,12 @@ router.param('model', (req, res, next) => {
   }
 });
 
-router.get('/:model', handleGetAll);
-router.get('/:model/:id', handleGetOne);
-router.post('/:model', handleCreate);
-router.put('/:model/:id', handleUpdate);
-router.delete('/:model/:id', handleDelete);
+routerv1.get('/:model', handleGetAll);
+routerv1.get('/:model/:id', handleGetOne);
+routerv1.post('/:model', handleCreate);
+routerv1.put('/:model/:id', handleUpdate);
+routerv1.delete('/:model/:id', handleDelete);
+
 
 async function handleGetAll(req, res) {
   let allRecords = await req.model.get();
@@ -47,9 +48,9 @@ async function handleUpdate(req, res) {
 
 async function handleDelete(req, res) {
   let id = req.params.id;
-  let deletedRecord = await req.model.destroy(id);
+  let deletedRecord = await req.model.delete(id);
   res.status(200).json(deletedRecord);
 }
 
 
-module.exports = router;
+module.exports = routerv1;

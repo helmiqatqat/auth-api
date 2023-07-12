@@ -1,6 +1,6 @@
 'use strict';
 const { server } = require('../src/server');
-const { db } = require('../src/auth/models/index');
+const { db } = require('../src/models/index');
 const supertest = require('supertest');
 const mockServerMethods = supertest(server);
 
