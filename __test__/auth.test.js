@@ -2,7 +2,7 @@
 
 process.env.SECRET = "secretstring";
 
-const { db } = require('../src/auth/models/index')
+const { db } = require('../src/models/index')
 const supertest = require('supertest');
 const {server} = require('../src/server');
 
@@ -39,7 +39,7 @@ describe('Auth Router', () => {
       .auth(username, password);
 
     const userObject = response.body;
-    expect(response.status).toBe(201);
+    expect(response.status).toBe(200);
     expect(userObject.token).toBeDefined();
     expect(userObject.user.id).toBeDefined();
     expect(userObject.user.username).toEqual(username);
